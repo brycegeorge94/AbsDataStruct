@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import struct.sll.SinglyLinkedList;
@@ -42,7 +41,6 @@ public class SinglyLinkedListTests {
     }
 
     @Test
-    @Ignore
     public void removeIndexTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
         int i = 69;
@@ -51,13 +49,13 @@ public class SinglyLinkedListTests {
         sll.add(i);
         sll.add(j);
         sll.add(k);
-        sll.remove(0);
+        sll.remove(1);
+        assertEquals(i, sll.get(0), "First element should still be in place");
         assertEquals(k, sll.get(1), "Third element should now be at second index");
         assertEquals(2, sll.size(), "Size should be two");
     }
 
     @Test
-    @Ignore
     public void removeDataTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
         int i = 69;

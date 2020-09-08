@@ -14,14 +14,13 @@ public class SinglyLinkedList {
     public void add(Object data) {
         if (head == null) {
             head = new Node(data);
-            size++;
         } else {
             Node curr = head;
             while (curr.next != null)
                 curr = curr.next;
             curr.next = new Node(data);
-            size++;
         }
+        size++;
     }
 
     public void add(int index, Object data) {
@@ -35,14 +34,40 @@ public class SinglyLinkedList {
             Node temp = new Node(data, curr);
             curr = temp;
         }
+        size++;
     }
 
     public void remove(int index) {
-
+        if (index == 0) {
+            head = head.next;
+        } else {
+            Node curr = head.next;
+            Node prev = head;
+            for (int i = 1; i < index; i++) {
+                prev = curr;
+                curr = curr.next;
+            }
+            prev.next = curr.next;
+        }
+        size--;
     }
 
     public void removeData(Object data) {
-
+        if (head.data == data) {
+            head = head.next;
+        } else {
+            Node curr = head.next;
+            Node prev = head;
+            for (int i = 1; i < size; i++) {
+                if (curr.data == data) {
+                    break;
+                }
+                prev = curr;
+                curr = curr.next;
+            }
+            prev.next = curr.next;
+        }
+        size--;
     }
 
     public Object get(int index) {
