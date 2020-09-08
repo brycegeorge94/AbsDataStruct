@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import struct.sll.SinglyLinkedList;
@@ -9,7 +10,7 @@ import struct.sll.SinglyLinkedList;
 public class SinglyLinkedListTests {
 
     @Test
-    public void addAndGet() {
+    public void addAndGetDataTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
         int i = 28;
         sll.add(i);
@@ -18,7 +19,7 @@ public class SinglyLinkedListTests {
     }
 
     @Test
-    public void addAndGetMulti() {
+    public void addAndGetMultiTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
         int i = 28;
         int j = 91;
@@ -33,17 +34,40 @@ public class SinglyLinkedListTests {
     }
 
     @Test
-    public void getIndex() {
+    public void getIndexTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
         int i = 82;
-        int j = 91;
-        int k = 36;
+        sll.add(i);
+        assertEquals(0, sll.getIndex(i), "Index should equal 0");
+    }
+
+    @Test
+    @Ignore
+    public void removeIndexTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        int i = 69;
+        int j = 32;
+        int k = 45;
         sll.add(i);
         sll.add(j);
         sll.add(k);
-        assertEquals(0, sll.getIndex(i), "Index should equal 0");
-        assertEquals(1, sll.getIndex(j), "Index should equal 1");
-        assertEquals(2, sll.getIndex(k), "Index should equal 2");
+        sll.remove(0);
+        assertEquals(k, sll.get(1), "Third element should now be at second index");
+        assertEquals(2, sll.size(), "Size should be two");
     }
 
+    @Test
+    @Ignore
+    public void removeDataTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        int i = 69;
+        int j = 32;
+        int k = 45;
+        sll.add(i);
+        sll.add(j);
+        sll.add(k);
+        sll.removeData(k);
+        assertEquals(2, sll.size(), "Size should be two");
+        assertEquals(-1, sll.getIndex(k), "Element should not be in list");
+    }
 }
