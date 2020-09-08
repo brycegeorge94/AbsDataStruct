@@ -1,0 +1,9 @@
+## Abstract Data Structure Implementation
+
+The aim of this repository is to develop implementations of various data structures in various languages.
+
+Roadmap:
+
+- Java | Singly and Doubly Linked Lists
+- C++ | Stack and Queue
+- Python | Binary Search Tree
