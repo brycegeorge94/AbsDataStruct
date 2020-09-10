@@ -5,5 +5,5 @@ The aim of this repository is to develop implementations of various data structu
 Roadmap:
 
 - Java | Singly and Doubly Linked Lists
-- C++ | Stack and Queue
-- Python | Binary Search Tree
+- C++ | Binary Search Tree 
+- Python | Stack and Queue 
