@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class SinglyLinkedListTests {
     @Test
     public void addAndGetDataTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 28;
+        int i = 1;
         sll.add(i);
         assertEquals(i, sll.get(0), "Value i should match");
         assertEquals(1, sll.size(), "Size should be one");
@@ -20,9 +21,9 @@ public class SinglyLinkedListTests {
     @Test
     public void addAndGetMultiTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 28;
-        int j = 91;
-        int k = 40;
+        int i = 1;
+        int j = 2;
+        int k = 3;
         sll.add(i);
         sll.add(j);
         sll.add(k);
@@ -35,9 +36,9 @@ public class SinglyLinkedListTests {
     @Test
     public void addIndexTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 11;
-        int j = 22;
-        int k = 33;
+        int i = 1;
+        int j = 2;
+        int k = 3;
         sll.add(i);
         sll.add(j);
         sll.add(1, k);
@@ -47,9 +48,19 @@ public class SinglyLinkedListTests {
     }
 
     @Test
+    public void addIndexEndTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        sll.add(1);
+        sll.add(2);
+        sll.add(2, 3);
+        assertEquals(3, sll.size(), "Element should be added to list");
+        assertEquals(3, sll.get(2), "Element at position two should be shree");
+    }
+
+    @Test
     public void getIndexTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 82;
+        int i = 1;
         sll.add(i);
         assertEquals(0, sll.getIndex(i), "Index should equal 0");
     }
@@ -57,9 +68,9 @@ public class SinglyLinkedListTests {
     @Test
     public void removeIndexTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 69;
-        int j = 32;
-        int k = 45;
+        int i = 1;
+        int j = 2;
+        int k = 3;
         sll.add(i);
         sll.add(j);
         sll.add(k);
@@ -72,13 +83,14 @@ public class SinglyLinkedListTests {
     @Test
     public void removeDataTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        int i = 69;
-        int j = 32;
-        int k = 45;
+        int i = 1;
+        int j = 2;
+        int k = 3;
         sll.add(i);
         sll.add(j);
         sll.add(k);
-        sll.removeData(k);
+        assertEquals(true, sll.removeData(k), "Method should return true - element removed");
+        assertEquals(false, sll.removeData(k), "Method should return false - already removed");
         assertEquals(2, sll.size(), "Size should be two");
         assertEquals(-1, sll.getIndex(k), "Element should not be in list");
     }
@@ -115,13 +127,40 @@ public class SinglyLinkedListTests {
     @Test
     public void setTest() {
         SinglyLinkedList sll = new SinglyLinkedList();
-        sll.add(25);
-        sll.add(55);
+        sll.add(1);
+        sll.add(2);
         int i = 10;
         int j = 20;
         sll.set(0, i);
         sll.set(1, j);
         assertEquals(i, sll.get(0), "Object at index zero should be replaced to i");
         assertEquals(j, sll.get(1), "Object at index zero should be replaced to j");
+    }
+
+    @Test
+    public void addExceptionTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        sll.add(1);
+        sll.add(2);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.add(-1, 1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.add(3, 1);
+        });
+    }
+
+    @Test
+    public void emptyListTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.get(0);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.set(0, 1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.remove(0);
+        });
     }
 }
