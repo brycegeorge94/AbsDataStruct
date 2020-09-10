@@ -28,11 +28,13 @@ public class SinglyLinkedList {
             Node temp = new Node(data, head);
             head = temp;
         } else {
-            Node curr = head;
-            for (int i = 0; i < index; i++)
+            Node prev = head;
+            Node curr = head.next;
+            for (int i = 1; i < index; i++) {
+                prev = curr;
                 curr = curr.next;
-            Node temp = new Node(data, curr);
-            curr = temp;
+            }
+            prev.next = new Node(data, curr);
         }
         size++;
     }
@@ -41,8 +43,8 @@ public class SinglyLinkedList {
         if (index == 0) {
             head = head.next;
         } else {
-            Node curr = head.next;
             Node prev = head;
+            Node curr = head.next;
             for (int i = 1; i < index; i++) {
                 prev = curr;
                 curr = curr.next;
@@ -88,6 +90,16 @@ public class SinglyLinkedList {
             curr = curr.next;
         }
         return result;
+    }
+
+    public boolean contains(Object data) {
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == data)
+                return true;
+            curr = curr.next;
+        }
+        return false;
     }
 
     public int size() {
