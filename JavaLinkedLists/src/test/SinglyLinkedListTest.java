@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import struct.sll.SinglyLinkedList;
 
-public class SinglyLinkedListTests {
+public class SinglyLinkedListTest {
 
     @Test
     public void addAndGetDataTest() {
