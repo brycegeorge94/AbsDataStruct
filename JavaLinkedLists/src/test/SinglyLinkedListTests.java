@@ -111,4 +111,17 @@ public class SinglyLinkedListTests {
         sll.removeData(5);
         assertEquals(4, sll.size(), "Size should be four");
     }
+
+    @Test
+    public void setTest() {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        sll.add(25);
+        sll.add(55);
+        int i = 10;
+        int j = 20;
+        sll.set(0, i);
+        sll.set(1, j);
+        assertEquals(i, sll.get(0), "Object at index zero should be replaced to i");
+        assertEquals(j, sll.get(1), "Object at index zero should be replaced to j");
+    }
 }

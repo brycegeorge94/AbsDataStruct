@@ -92,6 +92,14 @@ public class SinglyLinkedList {
         return result;
     }
 
+    public void set(int index, Object data) {
+        Node curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        curr.data = data;
+    }
+
     public boolean contains(Object data) {
         Node curr = head;
         while (curr != null) {
