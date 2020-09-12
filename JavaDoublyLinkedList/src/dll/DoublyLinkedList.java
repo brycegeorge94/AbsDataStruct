@@ -9,10 +9,10 @@ public class DoublyLinkedList {
 	public DoublyLinkedList() {}
 	
 	public DoublyLinkedList(Object obj) {
-		addFront(obj);
+		prepend(obj);
 	}
 	
-	public void addFront(Object obj) {
+	public void prepend(Object obj) {
 		if (head == null) {
 			// List is empty, create new node
 			head = new Node(obj, null, null);
@@ -31,8 +31,19 @@ public class DoublyLinkedList {
 		size++;
 	}
 	
-	public void addBack(Object obj) {
-		
+	public void append(Object obj) {
+		// Identical implementation of prepend, just without resetting head
+		if (head == null)
+			head = new Node(obj, null, null);
+		else if (head.prev == null ) {
+			Node temp = new Node (obj, head, head);
+			head.next = head.prev = temp;
+		} else {
+			Node temp = new Node(obj, head, head.prev);
+			head.prev.next = temp;
+			head.prev = temp;
+		}
+		size++;
 	}
 	
 	public void addAt(int index, Object obj) {
@@ -71,7 +82,16 @@ public class DoublyLinkedList {
 	}
 	
 	public int getIndex(Object obj) {
-		return 0;
+		Node curr = head;
+		int index = -1;
+		
+		for (int i = 0; i < size; i++) {
+			if (curr.obj == obj) {
+				index = i;
+				break;
+			}
+		}
+		return index;
 	}
 	
 	public boolean contains(Object obj) {
