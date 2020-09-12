@@ -25,6 +25,25 @@ class DoublyLinkedListTest {
 	}
 	
 	@Test
+	void addFrontWithOneElementTest() {
+		int i = 1;
+		dll.addFront(2);
+		dll.addFront(i);
+		assertEquals(i, dll.getFrom(0), "Object i should be at index zero");
+		assertEquals(2, dll.size(), "Size should equal two");
+	}
+	
+	@Test
+	void addFrontWithTwoOrMoreElementTest() {
+		int i = 1;
+		dll.addFront(2);
+		dll.addFront(3);
+		dll.addFront(i);
+		assertEquals(i, dll.getFrom(0), "Object i should be at index zero");
+		assertEquals(3, dll.size(), "Size should equal three");
+	}
+	
+	@Test
 	void addBackAndGetIndexSingleTest() {
 		int i = 1;
 		dll.addBack(i);
