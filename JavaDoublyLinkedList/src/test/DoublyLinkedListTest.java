@@ -81,20 +81,84 @@ class DoublyLinkedListTest {
 	}
 	
 	@Test
-	void removeTest() {
+	void removeOneTest() {
 		int i = 1;
 		dll.prepend(i);
 		assertEquals(true, dll.remove(i), "Object i should be removed from list");
 		assertEquals(false, dll.remove(i), "Object i should already be removed from list");
+		assertEquals(0, dll.size(), "Size should be zero");
 	}
 	
 	@Test
-	void removeFromTest() {
+	void removeTwoTest() {
 		int i = 1;
 		dll.prepend(2);
-		dll.addAt(0, i);
+		dll.prepend(i);
+		assertEquals(true, dll.remove(i), "Object i should be removed from list");
+		assertEquals(false, dll.remove(i), "Object i should already be removed from list");
+		assertEquals(1, dll.size(), "Size should be one");
+	}
+	
+	@Test
+	void removeMultiTest() {
+		int i = 1;
+		dll.prepend(2);
+		dll.prepend(3);
+		dll.prepend(i);
+		assertEquals(true, dll.remove(i), "Object i should be removed from list");
+		assertEquals(false, dll.remove(i), "Object i should already be removed from list");
+		assertEquals(2, dll.size(), "Size should be two");
+	}
+	
+	@Test
+	void removeFromOneTest() {
+		int i = 1;
+		dll.prepend(i);
+		dll.removeFrom(i);
+		assertEquals(0, dll.size(), "Size should be zero after removal");
+	}
+	
+	@Test
+	void removeFromTwoTest() {
+		int i = 1;
+		dll.prepend(2);
+		dll.prepend(i);
+		dll.removeFrom(1);
+		assertEquals(i, dll.getFrom(0), "Object at index zero should be i");
+		assertEquals(1, dll.size(), "Size should be one");
+	}
+	
+	@Test
+	void removeFromOneHeadTest() {
+		int i = 1;
+		dll.prepend(i);
+		dll.prepend(2);
 		dll.removeFrom(0);
-		assertEquals(2, dll.getFrom(0), "Object at index zero should be two");
+		assertEquals(i, dll.getFrom(0), "Object at index zero should be i");
+		assertEquals(1, dll.size(), "Size should be one");
+	}
+	
+	@Test
+	void removeFromMultiTest() {
+		int i = 1;
+		dll.prepend(2);
+		dll.prepend(3);
+		dll.append(i);
+		dll.removeFrom(1);
+		assertEquals(i, dll.getFrom(1), "Object at index one should be i");
+		assertEquals(2, dll.size(), "Size should be two");
+	}
+	
+	@Test
+	void removeFromMultiHeadTest() {
+		int i = 2;
+		dll.prepend(3);
+		dll.prepend(i);
+		dll.prepend(1);
+		dll.removeFrom(0);
+		assertEquals(i, dll.getFrom(0), "Object at head should be i");
+		assertEquals(2, dll.size(), "Size should be two");
+		
 	}
 	
 	@Test
