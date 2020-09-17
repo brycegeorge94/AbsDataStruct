@@ -42,7 +42,7 @@ public class DoublyLinkedList {
 			head = new Node(obj, null, null);
 		
 		else if (head.prev == null ) {
-			Node temp = new Node (obj, head, head);
+			Node temp = new Node(obj, head, head);
 			head.next = head.prev = temp;	
 		}
 		
@@ -58,7 +58,34 @@ public class DoublyLinkedList {
 	public void addAt(int index, Object obj) {
 		if (index != 0)
 			verifyNotEmpty();
+		int parsedIndex = parseIndex(index);
 		
+		Node toAdd = head;
+		for (int i = 0; i < parsedIndex; i++)
+			toAdd = toAdd.next;
+		
+		// List empty, add new node as head
+		if (head == null)
+			head = new Node(obj, null, null);
+		
+		// List has one node, create new node and interlink
+		else if (head.next == null) {
+			Node temp = new Node(obj, head, head);
+			head.next = head.prev = temp;
+			// If inserting at 0, move head to new node
+			if (parsedIndex == 0)
+				head = temp;
+		}
+		
+		else {
+			Node temp = new Node(obj, toAdd, toAdd.prev);
+			toAdd.prev.next = temp;
+			toAdd.prev = temp;
+			if (parsedIndex == 0)
+				head = temp;
+		}
+		
+		size++;
 	}
 	
 	public boolean remove(Object obj) {
@@ -97,9 +124,6 @@ public class DoublyLinkedList {
 		verifyNotEmpty();
 		int parsedIndex = parseIndex(index);
 		
-		if (parsedIndex == 0)
-			return head.obj;
-		
 		Node curr = head;
 		
 		if (parsedIndex <= size/2)	// If in front half of list
@@ -116,6 +140,7 @@ public class DoublyLinkedList {
 		Node curr = head;
 		int index = -1;
 		
+		// Track index, find matching object, break loop
 		for (int i = 0; i < size; i++) {
 			if (curr.obj == obj) {
 				index = i;
@@ -127,6 +152,12 @@ public class DoublyLinkedList {
 	}
 	
 	public boolean contains(Object obj) {
+		Node curr = head;
+		for (int i = 0; i < size; i++) {
+			if (curr.obj == obj)
+				return true;
+			curr = curr.next;
+		}
 		return false;
 	}
 	

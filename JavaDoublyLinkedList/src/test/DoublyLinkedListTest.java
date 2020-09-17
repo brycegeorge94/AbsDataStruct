@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -71,13 +73,9 @@ class DoublyLinkedListTest {
 	}
 	
 	@Test
-	void addAtAndGetFromTest() {
-		dll.prepend(2);
-		dll.prepend(3);
+	void removeEmpty() {
 		int i = 1;
-		dll.addAt(1, i);
-		assertEquals(i, dll.getFrom(1), "Object i should be at index zero");
-		assertEquals(1, dll.size(), "Size should equal one");
+		assertEquals(false, dll.remove(i), "Object not removed as list is empty");
 	}
 	
 	@Test
@@ -108,6 +106,13 @@ class DoublyLinkedListTest {
 		assertEquals(true, dll.remove(i), "Object i should be removed from list");
 		assertEquals(false, dll.remove(i), "Object i should already be removed from list");
 		assertEquals(2, dll.size(), "Size should be two");
+	}
+	
+	@Test
+	void removeFromEmptyTest() {
+		assertThrows(NoSuchElementException.class, () -> {
+			dll.removeFrom(0);
+		});
 	}
 	
 	@Test
@@ -158,7 +163,6 @@ class DoublyLinkedListTest {
 		dll.removeFrom(0);
 		assertEquals(i, dll.getFrom(0), "Object at head should be i");
 		assertEquals(2, dll.size(), "Size should be two");
-		
 	}
 	
 	@Test
@@ -169,5 +173,50 @@ class DoublyLinkedListTest {
 		int j = 2;
 		assertEquals(false, dll.contains(j), "Object j should not exist in list");
 	}
-
+	
+	@Test
+	void addAtZeroEmptyTest() {
+		int i = 1;
+		dll.addAt(0, i);
+		assertEquals(i, dll.getFrom(0), "Object at index zero should be i");
+		assertEquals(1, dll.size(), "Size should be one");
+	}
+	
+	@Test
+	void addAtZeroOneNodeTest() {
+		int i = 1;
+		dll.append(2);
+		dll.addAt(0, i);
+		assertEquals(i, dll.getFrom(0), "Object at index zero should be i");
+		assertEquals(2, dll.size(), "Size should be two");
+	}
+	
+	@Test
+	void addAtZeroTwoNodeTest() {
+		int i = 1;
+		dll.append(2);
+		dll.append(3);
+		dll.addAt(0, i);
+		assertEquals(i, dll.getFrom(0), "Object at index zero should be i");
+		assertEquals(3, dll.size(), "Size should be three");
+	}
+	
+	@Test
+	void addAtOneOneNodeTest() {
+		int i = 1;
+		dll.append(2);
+		dll.addAt(1, i);
+		assertEquals(i, dll.getFrom(1), "Object at index one should be i");
+		assertEquals(2, dll.size(), "Size should be two");
+	}
+	
+	@Test
+	void addAtOneTwoNodeTest() {
+		int i = 1;
+		dll.append(2);
+		dll.append(3);
+		dll.addAt(1, i);
+		assertEquals(i, dll.getFrom(1), "Object at index one should be i");
+		assertEquals(3, dll.size(), "Size should be three");
+	}
 }
