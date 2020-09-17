@@ -163,4 +163,15 @@ public class SinglyLinkedListTest {
             sll.remove(0);
         });
     }
+
+    @Test
+    public void removeToEmptyTest() {
+        int i = 1;
+        SinglyLinkedList sll = new SinglyLinkedList(i);
+        assertEquals(i, sll.get(0), "Object at index zero should be i");
+        sll.remove(0);
+        assertEquals(0, sll.size(), "Size should be zero");
+        sll.add(i);
+        assertEquals(i, sll.get(0), "Object at index zero should be i again");
+    }
 }
