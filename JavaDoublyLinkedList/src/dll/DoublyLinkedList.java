@@ -90,6 +90,7 @@ public class DoublyLinkedList {
 				index = i;
 				break;
 			}
+			curr = curr.next;
 		}
 		return index;
 	}
