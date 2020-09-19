@@ -2,6 +2,14 @@ package dll;
 
 import java.util.NoSuchElementException;
 
+/**
+ * <h3>Doubly Linked List Implementation</h3> This class is a simple
+ * implementation of a Doubly Linked List, with error handling by thrown
+ * exceptions with exhaustive testing.
+ * 
+ * @author Bryce George
+ * @since 19-09-2020
+ */
 public class DoublyLinkedList {
 	private Node head; // Node at index 0
 	private int size;
@@ -88,6 +96,12 @@ public class DoublyLinkedList {
 		size++;
 	}
 	
+	/**
+	 * Removes an Object from within the list.
+	 * 
+	 * @param obj The object to be removed.
+	 * @return Returns true if object was removed, false otherwise.
+	 */
 	public boolean remove(Object obj) {
 		Node curr = head;
 		Node toDelete = null;
@@ -165,9 +179,15 @@ public class DoublyLinkedList {
 		return size;
 	}
 	
-	/* Allows use of given indices out of range, as the LinkedList loops anyway
-	* For example, if list is of size 10, an index of 15 will retrieve index 5
-	* Also allows negatives, for size 10, -3 will retrieve item at index 7 */
+	/**
+	 * Parses index so given index is within range of list.
+	 * For example, for a list of size 10, an passed index of 15 will access
+	 * the 5th element (15-10). Negative indexes will also access previous
+	 * elements (eg. for size 10, -3 will access element 7).
+	 * 
+	 * @param index The index to be parsed to a valid value
+	 * @return The parsed index for the element to be accessed
+	 */
 	private int parseIndex(int index) {
 		boolean negative = index < 0;
 		int temp = Math.abs(index);
